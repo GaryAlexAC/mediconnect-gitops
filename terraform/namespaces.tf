@@ -9,14 +9,14 @@ locals {
 }
 
 resource "kubernetes_namespace_v1" "managed" {
-    for_each = locals.namespaces
+  for_each = local.namespaces
 
-    metadata {
-        name = each.key
+  metadata {
+    name = each.key
 
-        labels = {
-            "app.kubernetes.io/managed-by"  = "terraform"
-            "mediconnect.io/purpose"        = each.value
-        }
+    labels = {
+      "app.kubernetes.io/managed-by" = "terraform"
+      "mediconnect.io/purpose"       = each.value
     }
+  }
 }
