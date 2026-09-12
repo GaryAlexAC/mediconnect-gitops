@@ -58,6 +58,12 @@ resource "kubernetes_role_v1" "argocd_application_manager" {
     resources  = ["sealedsecrets"]
     verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
   }
+  
+  rule {
+    api_groups = ["kyverno.io"]
+    resources  = ["policies"]
+    verbs      = ["get", "list", "watch", "create", "update", "patch", "delete"]
+  }
 }
 
 resource "kubernetes_role_binding_v1" "argocd_application_manager" {
