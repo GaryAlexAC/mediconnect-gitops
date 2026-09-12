@@ -21,6 +21,16 @@ resource "helm_release" "argocd" {
     value = "false"
   }
 
+  set {
+    name  = "applicationSet.enabled"
+    value = "false"
+  }
+
+  set {
+    name  = "notifications.enabled"
+    value = "false"
+  }
+
   depends_on = [
     kubernetes_role_binding_v1.argocd_application_manager,
   ]
