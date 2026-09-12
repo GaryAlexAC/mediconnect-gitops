@@ -1,0 +1,21 @@
+apiVersion: kyverno.io/v1
+kind: Policy
+metadata:
+  name: disallow-latest
+  namespace: sa-p8
+spec:
+  validationFailureAction: Enforce
+  background: false
+  rules:
+    - name: require-immutable-image-tag
+      match:
+        any:
+          - resources:
+              kinds:
+                - Pod
+      validate:
+        message: "Las imagenes no pueden usar la etiqueta latest."
+        pattern:
+          spec:
+            containers:
+              - image: "!*:latest"
